@@ -6,7 +6,7 @@
 
 ## Description
 
-A simple Mindustry plugin to enable jvm mod/plugin dependencies for V6 and V7 pre [#6328](https://github.com/Anuken/Mindustry/pull/6328).
+A simple Mindustry plugin to enable jvm mod/plugin dependencies for V6 and V7 up to v135.
 
 To use it, put your mods/plugins in a directory named `./mod-loader` and enjoy.
 
@@ -18,12 +18,6 @@ To use it, put your mods/plugins in a directory named `./mod-loader` and enjoy.
 
 ## Testing 
 
-- `./gradlew runMindustryClient`: Run mindustry in desktop.
+- `./gradlew runMindustryClient`: Run Mindustry in desktop with the plugin.
 
-- `./gradlew runMindustryServer`: Run mindustry in a server.
-
-## Support
-
-- Xpdustry discord : https://discord.xpdustry.fr
-
-- Maintainer discord : Phinner#0867
+- `./gradlew runMindustryServer`: Run Mindustry in a server with the plugin.
