@@ -6,7 +6,7 @@
 
 ## Description
 
-Simple Mindustry plugin to enable dependencies jvm mod/plugin dependencies.
+A simple Mindustry plugin to enable jvm mod/plugin dependencies.
 
 To use it, put your mods/plugins in a directory named `./mod-loader` and enjoy.
 
