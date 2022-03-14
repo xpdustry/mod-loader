@@ -116,7 +116,7 @@ public final class ModLoaderPlugin extends Plugin {
       }
 
       Log.debug("MOD-LOADER: Loaded mod '@' in @ms", meta.name, Time.elapsed());
-      return new LoadedMod(null, file, mainMod, sharedClassLoader, meta);
+      return new LoadedMod(file, root, mainMod, sharedClassLoader, meta);
     } else {
       throw new ModLoaderException("Missing main class or outdated version.");
     }

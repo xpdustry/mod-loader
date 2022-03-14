@@ -3,7 +3,7 @@
   "displayName": "Xpdustry ModLoader",
   "author": "Xpdustry",
   "description": "A custom mod loader plugin for jvm plugins/mods that rely on dependencies. ",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minGameVersion": "v126.2",
   "hidden": true,
   "java": true,
