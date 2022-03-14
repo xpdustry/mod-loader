@@ -21,9 +21,3 @@ To use it, put your mods/plugins in a directory named `./mod-loader` and enjoy.
 - `./gradlew runMindustryClient`: Run Mindustry in desktop with the plugin.
 
 - `./gradlew runMindustryServer`: Run Mindustry in a server with the plugin.
-
-## Support
-
-- Xpdustry discord : https://discord.xpdustry.fr
-
-- Maintainer discord : Phinner#0867
