@@ -8,7 +8,7 @@
 
 A simple Mindustry plugin to enable jvm mod/plugin dependencies for V6 and V7 up to v135.
 
-To use it, put your mods/plugins in a directory named `./mod-loader` and enjoy.
+To use it, put your mods/plugins in a directory named `./mod-loader`instead of `./config/mods` (except `mod-loader`) and enjoy.
 
 ## Building
 
