@@ -10,6 +10,19 @@ A simple Mindustry plugin to enable jvm mod/plugin dependencies for V6 and V7 up
 
 To use it, put your mods/plugins in a directory named `./mod-loader` instead of `./config/mods` (except `mod-loader`) and enjoy.
 
+> Your file tree should look like this
+  
+  ```
+  - config/
+    - mods/
+      - ModLoaderPlugin.jar
+      - ModThatDoesNotHaveDependencies.jar
+  - mod-loader/
+    - ModThatHasDependencies.jar
+    - ModDependencyOfTheAboveMod.jar
+  - server.jar
+  ```
+
 ## Building
 
 - `./gradlew jar` for a simple jar that contains only the plugin code.
