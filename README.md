@@ -17,10 +17,14 @@ To use it, put your mods/plugins in a directory named `./mod-loader` instead of 
     - mods/
       - ModLoaderPlugin.jar
       - ModThatDoesNotHaveDependencies.jar
+      - ...
+    - ...
   - mod-loader/
     - ModThatHasDependencies.jar
-    - ModDependencyOfTheAboveMod.jar
+    - DependencyOfTheAboveMod.jar
+    - ...
   - server.jar
+  - ...
   ```
 
 ## Building
