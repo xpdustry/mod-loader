@@ -6,11 +6,25 @@
 
 ## Description
 
-A simple Mindustry plugin to enable jvm mod/plugin dependencies for V6 and V7 up to v135.
+A simple Mindustry plugin to enable jvm mod/plugin dependencies for V6 and V7 below v136.
 
 To use it, put your mods/plugins in a directory named `./mod-loader` instead of `./config/mods` (except `mod-loader`) and enjoy.
 
-> Your file tree should look like this
+## Building
+
+- `./gradlew jar` for a simple jar that contains only the plugin code.
+
+- `./gradlew shadowJar` for a fatJar that contains the plugin and its dependencies (use this for your server).
+
+## Testing 
+
+- `./gradlew runMindustryClient`: Run Mindustry in desktop with the plugin.
+
+- `./gradlew runMindustryServer`: Run Mindustry in a server with the plugin.
+
+### Nice tips
+
+- Your file tree should look like this
   
   ```
   - config/
@@ -27,14 +41,4 @@ To use it, put your mods/plugins in a directory named `./mod-loader` instead of 
   - ...
   ```
 
-## Building
-
-- `./gradlew jar` for a simple jar that contains only the plugin code.
-
-- `./gradlew shadowJar` for a fatJar that contains the plugin and its dependencies (use this for your server).
-
-## Testing 
-
-- `./gradlew runMindustryClient`: Run Mindustry in desktop with the plugin.
-
-- `./gradlew runMindustryServer`: Run Mindustry in a server with the plugin.
+- It's perfecly fine to put regular mods in the `mod-loader` directory.
