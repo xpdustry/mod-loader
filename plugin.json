@@ -1,13 +1,13 @@
 {
   "name": "xpdustry-mod-loader-plugin",
-  "displayName": "Xpdustry ModLoader",
-  "author": "Xpdustry",
+  "displayName": "ModLoader",
+  "author": "xpdustry",
   "description": "A custom mod loader plugin for jvm plugins/mods that rely on dependencies. ",
-  "version": "1.0.1",
-  "minGameVersion": "v126.2",
+  "version": "1.0.2",
+  "minGameVersion": "126",
   "hidden": true,
   "java": true,
   "main": "fr.xpdustry.loader.ModLoaderPlugin",
-  "repo": "Xpdustry/ModLoaderPlugin",
+  "repo": "xpdustry/mod-loader",
   "dependencies": []
 }

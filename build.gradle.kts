@@ -1,46 +1,44 @@
-import fr.xpdustry.toxopid.util.ModMetadata
-import fr.xpdustry.toxopid.extension.ModTarget
+import fr.xpdustry.toxopid.dsl.mindustryDependencies
 import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
 import java.io.ByteArrayOutputStream
 
 plugins {
-    java
-    `maven-publish`
-    id("net.ltgt.errorprone") version "2.0.2"
-    id("fr.xpdustry.toxopid") version "1.3.2"
-    id("com.github.ben-manes.versions") version "0.42.0"
-    id("net.kyori.indra") version "2.1.1"
-    id("net.kyori.indra.publishing") version "2.1.1"
+    id("net.kyori.indra") version "3.1.2"
+    id("net.kyori.indra.publishing") version "3.1.2"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("net.ltgt.errorprone") version "3.1.0"
+    id("fr.xpdustry.toxopid") version "3.2.0"
+    id("com.github.ben-manes.versions") version "0.47.0"
 }
 
-val metadata = ModMetadata(file("${rootProject.rootDir}/plugin.json"))
+val metadata = fr.xpdustry.toxopid.spec.ModMetadata.fromJson(file("${rootProject.rootDir}/plugin.json"))
 group = property("props.project-group").toString()
 version = metadata.version + if (indraGit.headTag() == null) "-SNAPSHOT" else ""
 
 toxopid {
-    modTarget.set(ModTarget.HEADLESS)
-    arcCompileVersion.set(metadata.minGameVersion)
-    mindustryCompileVersion.set(metadata.minGameVersion)
+    compileVersion.set("v${metadata.minGameVersion}")
+    platforms.add(fr.xpdustry.toxopid.spec.ModPlatform.HEADLESS)
 }
 
 repositories {
     mavenCentral()
+    maven("https://maven.xpdustry.com/anuken") {
+        name = "xpdustry-anuken"
+        mavenContent { releasesOnly() }
+    }
 }
 
 dependencies {
-    val junit = "5.8.2"
-    testImplementation("org.junit.jupiter:junit-jupiter-params:$junit")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:$junit")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit")
+    mindustryDependencies()
 
-    val jetbrains = "23.0.0"
+    val jetbrains = "24.0.1"
     compileOnly("org.jetbrains:annotations:$jetbrains")
     testCompileOnly("org.jetbrains:annotations:$jetbrains")
 
     // Static analysis
-    annotationProcessor("com.uber.nullaway:nullaway:0.9.5")
-    errorprone("com.google.errorprone:error_prone_core:2.11.0")
+    annotationProcessor("com.uber.nullaway:nullaway:0.10.11")
+    errorprone("com.google.errorprone:error_prone_core:2.20.0")
 }
 
 tasks.withType(JavaCompile::class.java).configureEach {
@@ -52,6 +50,12 @@ tasks.withType(JavaCompile::class.java).configureEach {
             option("NullAway:AnnotatedPackages", project.property("props.root-package").toString())
         }
     }
+}
+
+tasks.shadowJar {
+    archiveFileName.set("mod-loader.jar")
+    archiveClassifier.set("plugin")
+    from(file("${rootProject.rootDir}/plugin.json"))
 }
 
 // Required if you want to use the Release GitHub action
@@ -81,6 +85,10 @@ tasks.create("createRelease") {
     }
 }
 
+tasks.build {
+    dependsOn(tasks.shadowJar)
+}
+
 signing {
     val signingKey: String? by project
     val signingPassword: String? by project
@@ -93,24 +101,29 @@ indra {
         minimumToolchain(17)
     }
 
-    publishReleasesTo("xpdustry", "https://repo.xpdustry.fr/releases")
-    publishSnapshotsTo("xpdustry", "https://repo.xpdustry.fr/snapshots")
+    publishReleasesTo("xpdustry", "https://maven.xpdustry.com/releases")
+    publishSnapshotsTo("xpdustry", "https://maven.xpdustry.com/snapshots")
 
     mitLicense()
 
-    if (metadata.repo != null) {
-        val repo = metadata.repo!!.split("/")
-        github(repo[0], repo[1]) {
-            ci(true)
-            issues(true)
-            scm(true)
-        }
+    github("xpdustry", "mod-loader") {
+        ci(true)
+        issues(true)
+        scm(true)
     }
 
     configurePublications {
         pom {
+            organization {
+                name.set("Xpdustry")
+                url.set("https://www.xpdustry.fr")
+            }
+
             developers {
-                developer { id.set(metadata.author) }
+                developer {
+                    id.set("Phinner")
+                    timezone.set("Europe/Brussels")
+                }
             }
         }
     }
