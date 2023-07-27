@@ -116,7 +116,7 @@ indra {
         pom {
             organization {
                 name.set("Xpdustry")
-                url.set("https://www.xpdustry.fr")
+                url.set("https://www.xpdustry.com")
             }
 
             developers {
